@@ -6,12 +6,28 @@
 cmake_minimum_required (VERSION 2.6)
 set (CMAKE_BACKWARDS_COMPATIBILITY 2.6)
 
-include(${CMAKE_DIR}/common.cmake)
+# oksana: commenting out due to message("!!! WARNING! You generally should not include common.cmake from your plugin project!") in /common.cmake
+#include(${CMAKE_DIR}/common.cmake)
+
 include(FindBerkeleyDB.cmake)
+
+
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/PluginAuto")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/PluginCore")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/ScriptingCore")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/NpapiCore")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/ActiveXCore")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/3rdParty/boost")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/config")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/3rdParty/gecko-sdk/includes")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../../src/PluginAuto/Win")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/gen")
 
 set (PROJNAME ${PLUGIN_NAME})
 
-browserplugin_project(${PROJNAME})
+# oksana: browserplugin_project is deprecated; please use Project(IndexedDatabase) instead
+#browserplugin_project(${PROJNAME})
+Project(IndexedDatabase)
 
 file (GLOB GENERAL RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     *.cpp

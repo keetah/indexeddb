@@ -173,9 +173,10 @@ CursorSyncPtr IndexSync::openCursor(const boost::optional<FB::VariantMap>& info,
             info->find("flags") == info->end()) {
             throw FB::invalid_arguments();
         }
-        int flags = info->at("flags").convert_cast<int>();
+        int flags = info->find("flags")->second.convert_cast<int>();
+		  //int flags =info->find("flags")->second.convert_cast<int>();
 
-        range = boost::make_shared<KeyRange>(info->at("left"), info->at("right"), flags);
+        range = boost::make_shared<KeyRange>(info->find("left")->second, info->find("right")->second, flags);
     }
 
     const Cursor::Direction direction = dir ? static_cast<Cursor::Direction>(*dir) : Cursor::NEXT;
@@ -192,9 +193,9 @@ CursorSyncPtr IndexSync::openObjectCursor(const boost::optional<FB::VariantMap>&
             info->find("flags") == info->end()) {
             throw FB::invalid_arguments();
         }
-        int flags = info->at("flags").convert_cast<int>();
+        int flags = info->find("flags")->second.convert_cast<int>();
 
-        range = boost::make_shared<KeyRange>(info->at("left"), info->at("right"), flags);
+        range = boost::make_shared<KeyRange>(info->find("left")->second, info->find("right")->second, flags);
     }
 
     const Cursor::Direction direction = dir ? static_cast<Cursor::Direction>(*dir) : Cursor::NEXT;
