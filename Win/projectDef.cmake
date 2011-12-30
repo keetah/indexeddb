@@ -36,7 +36,7 @@ add_library(${PROJNAME} SHARED ${SOURCES})
 
 #oksana: not needed - the output dir is in FB_BIN, not in BIN_DIR
 #set_target_properties (${PROJNAME} PROPERTIES
-#    OUTPUT_NAME np${PLUGIN_NAME}
+#    OUTPUT_NAME ${PLUGIN_NAME}
 #    PROJECT_LABEL ${PROJNAME}
 #    RUNTIME_OUTPUT_DIRECTORY "${BIN_DIR}/${PLUGIN_NAME}"
 #    LIBRARY_OUTPUT_DIRECTORY "${BIN_DIR}/${PLUGIN_NAME}"
@@ -58,8 +58,8 @@ set(WIX_HEAT_FLAGS
 add_wix_installer( ${PLUGIN_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/Win/WiX/IndexedDatabasePluginInstaller.wxs
     PluginDLLGroup
-    ${FB_BIN_DIR}/${PLUGIN_NAME}/${CMAKE_CFG_INTDIR}/
-    ${FB_BIN_DIR}/${PLUGIN_NAME}/${CMAKE_CFG_INTDIR}/np${PLUGIN_NAME}.dll
+    ${FB_BUILD_DIR}/projects/${PLUGIN_NAME}/${CMAKE_CFG_INTDIR}/
+    ${FB_BUILD_DIR}/projects/${PLUGIN_NAME}/${CMAKE_CFG_INTDIR}/${PLUGIN_NAME}.dll
     ${PROJECT_NAME}
     )
 
